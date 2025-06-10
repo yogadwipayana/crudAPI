@@ -31,7 +31,6 @@ a {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-
 }
 #container {
   /* background-color: blue; */
@@ -60,11 +59,12 @@ a {
 .data-php::before, .data-js::before {
   content: '';
   position: relative;
-  background-color: var(--gray);
+  /* background-color: var(--white); */
+  background-color: #ddd;
   display: block;
   width: 100%;
   height: 2px;
-  top: -10px;
+  top: -15px;
 }
 .data-php, .data-js {
   background-color: var(--gray);
@@ -106,12 +106,6 @@ td, th {
     display: flex;
     flex-direction: column;
     gap: 5px;
-  }
-  #container {
-    /* background-color: red; */
-  }
-  #box {
-    /* background-color: blueviolet; */
   }
 }
 @media (max-width: 800px) {

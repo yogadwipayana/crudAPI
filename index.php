@@ -28,7 +28,7 @@ try {
             <h2>Data Mahasiswa PHP</h2>
             <div id="menu">
                 <a href="#" style="border: 0px;"><i class="fa-solid fa-table-cells-large"></i> Table</a>
-                <a href="create.php"><i class="fa-regular fa-user fa-sm"></i> Add Data</a>
+                <a href="create.php" style="background-color: var(--white);"><i class="fa-regular fa-user fa-sm"></i> Add Data</a>
             </div>
             <div class="data data-php">
             <table>
@@ -37,7 +37,7 @@ try {
                         <th>No</th>
                         <th>NIM</th>
                         <th>Nama</th>
-                        <th><i class="fa-regular fa-envelope"></i> EMail</th>
+                        <th><i class="fa-regular fa-envelope"></i> Email</th>
                         <th>Prodi</th>
                         <th><i class="fa-regular fa-map"></i> Action</th>
                     </tr>
@@ -75,7 +75,7 @@ try {
             <h2>Data Mahasiswa JS</h2>
             <div id="menu">
                 <a href="#" style="border: 0px;"><i class="fa-solid fa-table-cells-large"></i> Table</a>
-                <a href="create.php"><i class="fa-regular fa-user"></i> Add Data</a>
+                <a href="create.php" style="background-color: var(--white);"><i class="fa-regular fa-user"></i> Add Data</a>
             </div>
             <div class="data data-js">
             <table>
@@ -84,7 +84,7 @@ try {
                         <th>No</th>
                         <th>NIM</th>
                         <th>Nama</th>
-                        <th><i class="fa-regular fa-envelope"></i> EMail</th>
+                        <th><i class="fa-regular fa-envelope"></i> Email</th>
                         <th>Prodi</th>
                         <th><i class="fa-regular fa-map"></i> Action</th>
                     </tr>
