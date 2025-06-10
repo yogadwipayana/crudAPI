@@ -7,11 +7,28 @@
     header("Access-Control-Allow-Headers: Content-Type");
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        $sql = "SELECT m.id, m.nim, m.nama_mhs as nama, m.email, p.prodi FROM mahasiswa as m INNER JOIN prodi as p ON m.id_prodi = p.id WHERE m.status = 1";
-        $result = mysqli_query($conn, $sql);
+        try {
+            $accept = $_SERVER['HTTP_ACCEPT'] ?? '';
 
-        if ($result) {
+            if (stripos($accept, 'text/html') !== false && stripos($accept, 'application/json') === false) {
+                http_response_code(400);
+                echo json_encode([
+                    'code' => 400,
+                    'status' => 'error',
+                    'message' => 'Request directly from browser is not allowed, use application/json instead.'
+                ]);
+                exit;
+            }
+
+            $sql = "SELECT m.id, m.nim, m.nama_mhs as nama, m.email, p.prodi 
+                    FROM mahasiswa as m 
+                    INNER JOIN prodi as p ON m.id_prodi = p.id 
+                    WHERE m.status = 1";
+
+            $result = mysqli_query($conn, $sql);
+
             $mahasiswa = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
             $data = [];
             foreach ($mahasiswa as $row) {
                 $data[] = [
@@ -22,16 +39,22 @@
                     'prodi' => $row['prodi']
                 ];
             }
-            $mahasiswa = [
+
+            $response = [
                 'code' => 200,
                 'status' => 'success',
                 'message' => 'Data retrieved successfully',
                 'data' => $data
             ];
-            echo json_encode($mahasiswa);
-        } else {
+            echo json_encode($response);
+            
+        } catch (Exception $e) {
             http_response_code(500);
-            echo json_encode(['error' => 'Database query failed']);
+            echo json_encode([
+                'code' => 500,
+                'status' => 'error',
+                'message' => 'Failed to retrieve data',
+            ]);
         }
     } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $input = json_decode(file_get_contents("php://input"), true);
