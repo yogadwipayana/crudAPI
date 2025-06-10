@@ -30,7 +30,7 @@ try {
                 <a href="#" style="border: 0px;"><i class="fa-solid fa-table-cells-large"></i> Table</a>
                 <a href="create.php"><i class="fa-regular fa-user fa-sm"></i> Add Data</a>
             </div>
-            <div class="data-php">
+            <div class="data data-php">
             <table>
                 <thead>
                     <tr>
@@ -46,7 +46,7 @@ try {
                     
                     <?php
                     if (isset($result['status']) && $result['status'] === 'success' && isset($result['data'])) {
-                        if ($result['status'] == 'success') {
+                        if ($result['status'] == 'success' && count($result['data']) > 0) {
                             foreach ($result['data'] as $row) {
                                 static $no = 1;
                                 echo "<tr>";
@@ -60,6 +60,8 @@ try {
                                 echo "</tr>";
                                 $no++;
                             }
+                        } else {
+                            echo "<tr><td colspan='6'>Data Empty</td></tr>";
                         }
                     } else {
                         echo "<tr><td colspan='6'>Error fetching data</td></tr>";
@@ -75,16 +77,16 @@ try {
                 <a href="#" style="border: 0px;"><i class="fa-solid fa-table-cells-large"></i> Table</a>
                 <a href="create.php"><i class="fa-regular fa-user"></i> Add Data</a>
             </div>
-            <div class="data-js">
+            <div class="data data-js">
             <table>
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>NIM</th>
                         <th>Nama</th>
-                        <th>EMail</th>
+                        <th><i class="fa-regular fa-envelope"></i> EMail</th>
                         <th>Prodi</th>
-                        <th>Action</th>
+                        <th><i class="fa-regular fa-map"></i> Action</th>
                     </tr>
                 </thead>
                 <tbody id="data">
@@ -100,7 +102,7 @@ try {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                if (data.status === 'success') {
+                if (data.status === 'success' && data.data.length > 0) {
                     const tbody = document.getElementById('data');
                     let no = 1;
                     data.data.forEach(row => {
@@ -117,6 +119,9 @@ try {
                             </td>`;
                             tbody.appendChild(tr);
                     });
+                } else {
+                    const tbody = document.getElementById('data');
+                    tbody.innerHTML = `<tr><td colspan="6">Data Empty</td></tr>`;
                 }
             })
             .catch(error => {
