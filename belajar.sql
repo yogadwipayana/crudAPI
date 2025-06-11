@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2025 at 05:09 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Waktu pembuatan: 11 Jun 2025 pada 10.01
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mahasiswa`
+-- Struktur dari tabel `mahasiswa`
 --
 
 CREATE TABLE `mahasiswa` (
@@ -37,26 +37,20 @@ CREATE TABLE `mahasiswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `mahasiswa`
+-- Dumping data untuk tabel `mahasiswa`
 --
 
 INSERT INTO `mahasiswa` (`id`, `nim`, `nama_mhs`, `id_prodi`, `email`, `STATUS`) VALUES
-(1, '2210002', 'Budi Santoso', 2, 'budi@example.com', 1),
+(1, '2210002', 'Budi Santoso', 3, 'budi@example.com', 1),
 (2, '2210005', 'Made Cenik', 2, 'made@mail.com', 1),
 (15, '2401010299', 'Yoga', 1, 'Yoga@main.com', 1),
 (17, '2401010273', 'Budi', 2, 'Budi@mi.com', 1),
-(23, '24010100', 'hahaha', 3, 'jaja@gm.com', 0),
-(25, '2401010778', 'Kadek', 2, 'kadek@ex.com', 0),
-(26, '2401010999', 'Dwi', 2, 'dwi@example.com', 0),
-(27, '240101200', 'Apin', 2, 'apin@example.com', 0),
-(28, '2401010222', 'java', 1, 'java@ex.com', 0),
-(29, '2401012222', 'javas', 1, 'javas@ex.com', 0),
-(30, '2401010111', 'php', 3, 'php@example.com', 1);
+(25, '2401010778', 'Kadek', 2, 'kadek@ex.com', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prodi`
+-- Struktur dari tabel `prodi`
 --
 
 CREATE TABLE `prodi` (
@@ -67,7 +61,7 @@ CREATE TABLE `prodi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `prodi`
+-- Dumping data untuk tabel `prodi`
 --
 
 INSERT INTO `prodi` (`id`, `kode_prodi`, `prodi`, `tgl_berdiri`) VALUES
@@ -80,7 +74,7 @@ INSERT INTO `prodi` (`id`, `kode_prodi`, `prodi`, `tgl_berdiri`) VALUES
 --
 
 --
--- Indexes for table `mahasiswa`
+-- Indeks untuk tabel `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
   ADD PRIMARY KEY (`id`),
@@ -89,33 +83,33 @@ ALTER TABLE `mahasiswa`
   ADD KEY `id_prodi` (`id_prodi`);
 
 --
--- Indexes for table `prodi`
+-- Indeks untuk tabel `prodi`
 --
 ALTER TABLE `prodi`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `mahasiswa`
+-- AUTO_INCREMENT untuk tabel `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
--- AUTO_INCREMENT for table `prodi`
+-- AUTO_INCREMENT untuk tabel `prodi`
 --
 ALTER TABLE `prodi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `mahasiswa`
+-- Ketidakleluasaan untuk tabel `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
   ADD CONSTRAINT `mahasiswa_ibfk_1` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id`);

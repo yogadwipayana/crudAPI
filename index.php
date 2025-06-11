@@ -21,6 +21,7 @@ try {
     <title>Data Mahasiswa</title>
     <link rel="stylesheet" href="style/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.0/dist/sweetalert2.min.css">
 </head>
 <body>
     <div id="main">
@@ -55,8 +56,8 @@ try {
                                 echo "<td>" . $row['nama'] . "</td>";
                                 echo "<td>" . $row['email'] . "</td>";
                                 echo "<td>" . $row['prodi'] . "</td>";
-                                echo "<td class='action'>" . "<a href='update.php?id=" . $row['id'] . "'><i class='fa-regular fa-pen-to-square'></i> Edit</a> " . 
-                                    "<a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this record?\")'><i class='fa-regular fa-trash-can'></i> Delete</a>" . "</td>";
+                                echo "<td class='action'>" . "<a href='update.php?id=" . $row['id'] . "'><i class='fa-regular fa-pen-to-square'></i> Update</a> " . 
+                                    "<a href='' onclick='confirmDeletePHP(event, " . $row['id'] . ")'><i class='fa-regular fa-trash-can'></i> Delete</a>";
                                 echo "</tr>";
                                 $no++;
                             }
@@ -96,7 +97,43 @@ try {
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.0/dist/sweetalert2.all.min.js"></script>
     <script>
+        function confirmDeleteJS(event, id) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                window.location.href = `delete-js.php?id=${id}`;
+                }
+            });
+        }
+        function confirmDeletePHP(event, id) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                window.location.href = `delete.php?id=${id}`;
+                }
+            });
+        }
         const url = 'http://localhost/crudAPI/api/mahasiswa.php';
 
         fetch(url)
@@ -114,8 +151,8 @@ try {
                             <td>${row.email}</td>
                             <td>${row.prodi}</td>
                             <td class="action">
-                                <a href='update.php?id=${row.id}'><i class='fa-regular fa-pen-to-square'></i> Edit</a>
-                                <a href='delete-js.php?id=${row.id}' onclick='return confirm("Are you sure you want to delete this record?")'><i class='fa-regular fa-trash-can'></i> Delete</a>
+                                <a href='update.php?id=${row.id}' ><i class='fa-regular fa-pen-to-square'></i> Update</a>
+                                <a href='#' onclick='confirmDeleteJS(event, ${row.id})'><i class='fa-regular fa-trash-can'></i> Delete</a>
                             </td>`;
                             tbody.appendChild(tr);
                     });

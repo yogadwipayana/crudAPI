@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update</title>
+    <title>Update Data</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.0/dist/sweetalert2.min.css">
 </head>
 <body>
     
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.0/dist/sweetalert2.all.min.js"></script>
     <script>
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
@@ -25,11 +27,27 @@
         })
         .then(response => {
             if (response.ok) {
-                alert("Data deleted successfully");
-                window.location.href = "index.php";
+                setTimeout(() => {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "data has been deleted.",
+                        icon: "success",
+                    }, 3000);
+                    setTimeout (() => {
+                        window.location.href = "index.php";
+                    }, 3000)
+                });
             } else {
-                alert("Failed to delete data");
-                window.location.href = "index.php";
+                setTimeout(() => {
+                    Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!",
+                    });
+                    setTimeout (() => {
+                        window.location.href = "index.php";
+                    }, 3000)
+                });
             }
         });
     </script>
